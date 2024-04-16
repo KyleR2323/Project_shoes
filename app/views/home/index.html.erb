@@ -1,2 +1,49 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="block p-4">
+  <%= render 'home/home' %>
+
+  <div class="block m-auto is-centered">
+  <%= link_to 'ALL', root_path, class: "button is-dark" %>
+  <%= link_to 'SALE', root_path(filter: 'sale'), class: "button is-danger is-light" %>
+  <%= link_to 'NEW', root_path(filter: 'new'), class: "button is-success is-light" %>
+  </div>
+
+<div class="columns">
+  <% @shoes.each do |shoe| %>
+    <div class="column is-one-quarter">
+      <div class="card">
+        <div class="card-image">
+          <% if shoe.image.attached? %>
+            <%= image_tag shoe.image, alt: "#{shoe.shoe_model} image", size: "600x400" %>
+          <% end %>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4"><%= link_to shoe.shoe_model, shoe %></p>
+              <p class="subtitle is-6">Cost: <%= number_to_currency(shoe.price) %></p>
+
+              <% if shoe.sale_price.sale_price.present? %>
+                <p class="subtitle is-6 has-text-danger">
+                  Sale Price: <%= number_to_currency(shoe.sale_price.sale_price) %>
+                </p>
+              <% end %>
+
+              <hr>
+              <p class="subtitle is-6">Stocks: <%= shoe.quantity_available %></p>
+              <p class="subtitle is-6">Brand: <%= shoe.brand.brand_name %></p>
+              <p class="subtitle is-6">Type: <%= shoe.shoe_type %></p>
+              <p class="subtitle is-6">Color: <%= shoe.color %></p>
+              <p class="subtitle is-6">Gender: <%= shoe.gender %></p>
+              <p class="subtitle is-6">Size: <%= shoe.size %></p>
+              <p class="subtitle is-6"><strong>Description:</strong></p>
+              <p><%= shoe.description %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="columns is-centered">
+  <%= paginate @shoes %>
+</div>

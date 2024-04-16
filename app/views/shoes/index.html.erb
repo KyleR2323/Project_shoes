@@ -1,2 +1,10 @@
-<h1>Shoes#index</h1>
-<p>Find me in app/views/shoes/index.html.erb</p>
+<div class="columns is-multiline is-mobile">
+  <% @shoes.each do |shoe| %>
+      <div class="column is-one-quarter">
+        <%= render shoe %>
+      </div>
+  <% end %>
+</div>
+<div class="columns is-centered">
+  <%= paginate @shoes %>
+</div>

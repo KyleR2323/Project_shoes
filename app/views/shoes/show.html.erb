@@ -1,2 +1,32 @@
-<h1>Shoes#show</h1>
-<p>Find me in app/views/shoes/show.html.erb</p>
+<div class="columns is-centered">
+  <div class="column is-half">
+    <div class="card">
+      <div class="card-content">
+        <% if @shoe.image.present? %>
+          <div class="media-left">
+            <div class="card-image">
+              <%= image_tag(@shoe.image, alt: "#{@shoe.shoe_model} image", size: "600x400") %>
+            </div>
+          </div>
+        <% end %>
+
+        <strong><%= @shoe.brand.brand_name %></strong>
+        <strong><%= @shoe.shoe_model %></strong>
+        <p class="subtitle is-6"><%= @shoe.shoe_type %></p>
+        <p class="subtitle is-6">Price: <%= number_to_currency(@shoe.price) %></p>
+        <p class="subtitle is-6">Gender: <%= @shoe.gender %></p>
+        <p class="subtitle is-6">Stock Quantity: <%= @shoe.quantity_available %></p>
+        <p class="subtitle is-6">Color: <%= @shoe.color %></p>
+        <% if @shoe.description.present? %>
+          <p class="subtitle is-6"><strong>Description:</strong></p>
+          <div class="content">
+            <% @shoe.description.split("\n").each do |sentence| %>
+              <p><%= sentence.strip %></p>
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

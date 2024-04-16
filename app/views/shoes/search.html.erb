@@ -1,0 +1,37 @@
+<% if @keywords.present? %>
+  <p>Found <%= pluralize(@shoes.total_count, 'shoe') %> when searching for: <%= @keywords %></p>
+<% end %>
+
+<div class="columns is-multiline is-mobile">
+      <% @shoes.each do |shoe| %>
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <% if shoe.image.present? %>
+                  <div class="card-image">
+                    <%= image_tag(shoe.image, alt: "#{shoe.shoe_model} Image", size: '600x400') %>
+                  </div>
+              <% end %>
+
+              <div class="media-content">
+                <strong><%= link_to shoe.shoe_model, shoe %></strong>
+                <p class="subtitle is-6">Cost: <%= number_to_currency(shoe.price) %></p>
+                <hr>
+                <p class="subtitle is-6">Stocks: <%= shoe.quantity_available %></p>
+                <p class="subtitle is-6">Brand: <%= shoe.brand.brand_name %></p>
+                <p class="subtitle is-6">Type: <%= shoe.shoe_type %></p>
+                <p class="subtitle is-6">Color: <%= shoe.color %></p>
+                <p class="subtitle is-6">Gender: <%= shoe.gender %></p>
+                <p class="subtitle is-6">Size: <%= shoe.size %></p>
+                <p class="subtitle is-6">Description: <%= shoe.description %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="columns is-centered">
+    <%= paginate @shoes %>
+</div>
