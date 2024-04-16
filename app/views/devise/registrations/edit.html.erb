@@ -8,6 +8,24 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true, class: "input" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true, class: "input" %>
+  </div>
+
+  <div class="field">
+    <% province_array = Province.all.map { |s| [s.name.titleize, s.id]} %>
+    <%= f.label :province_id %><br />
+    <span class="select">
+    <%= f.select :province_id, options_for_select(province_array, f.object.province_id) %>
+    </span>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
