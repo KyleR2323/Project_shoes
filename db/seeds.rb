@@ -49,54 +49,54 @@ end
 puts "Created #{Brand.count} Brand"
 
 Province.create!([{
-                  region_name: "Alberta",
-                  gst: 0.05
+                  name: "Alberta",
+                  GST: 0.05
                 },
                 {
-                  region_name: "British Columbia",
-                  gst: 0.05,
-                  pst: 0.07
+                  name: "British Columbia",
+                  GST: 0.05,
+                  PST: 0.07
                 },
                 {
-                  region_name: "Manitoba",
-                  gst: 0.05,
-                  pst: 0.07
+                  name: "Manitoba",
+                  GST: 0.05,
+                  PST: 0.07
                 },
                 {
-                  region_name: "New Brunswick",
-                  hst: 0.15
+                  name: "New Brunswick",
+                  HST: 0.15
                 },
                 {
-                  region_name: "Newfoundland and Labrador",
-                  hst: 0.15
+                  name: "Newfoundland and Labrador",
+                  HST: 0.15
                 },
                 {
-                  region_name: "Northwest Territories",
-                  gst: 0.05
+                  name: "Northwest Territories",
+                  GST: 0.05
                 },
                 {
-                  region_name: "Nova Scotia",
-                  hst: 0.15
+                  name: "Nova Scotia",
+                  HST: 0.15
                 },
                 {
-                  region_name: "Nunavut",
-                  gst: 0.05
+                  name: "Nunavut",
+                  GST: 0.05
                 },
                 {
-                  region_name: "Ontario",
-                  hst: 0.13
+                  name: "Ontario",
+                  HST: 0.13
                 },
                 {
-                  region_name: "Prince Edward Island",
-                  hst: 0.15
+                  name: "Prince Edward Island",
+                  HST: 0.15
                 },
                 {
-                  region_name: "Quebec",
-                  gst: 0.05
+                  name: "Quebec",
+                  GST: 0.05
                 },
                 {
-                  region_name: "Saskatchewan",
-                  gst: 0.05,
-                  pst: 0.06
+                  name: "Saskatchewan",
+                  GST: 0.05,
+                  PST: 0.06
                 }])
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
