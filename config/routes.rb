@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'about/show'
   get 'cart/index'
   get 'shoes/index'
   get 'shoes/show'
