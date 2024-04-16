@@ -1,5 +1,5 @@
 class AboutController < ApplicationController
   def show
-    @contact = Contact.all.first
+    @about = About.all.first
   end
 end

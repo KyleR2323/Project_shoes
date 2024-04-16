@@ -1,73 +1,57 @@
 class CartController < ApplicationController
-  def index
-    @cart = Shoe.find(session[:shopping_cart].keys)
-  end
-
   def create
-    id = params[:id].to_i
-    session[:shopping_cart] ||= {}
+    logger.debug("Adding #{params[:id]} to cart with quantity #{params[:quantity]}")
 
-    unless session[:shopping_cart].key?(id)
-      session[:shopping_cart][id] = 1
-      shoe = Shoe.find(id)
-      flash[:notes] = "+ #{shoe.shoe_model} added to cart."
-    end
-
-    redirect_to root_path
-  end
-
-  def update
     id = params[:id].to_i
     quantity = params[:quantity].to_i
+    quantity = 1 if quantity <= 0
 
-    if quantity < 1
-      session[:shopping_cart].delete(id)
-    else
-      session[:shopping_cart][id] = quantity
+    shoe = Shoe.find_by(id: id)  # Find the shoe by its ID
+
+    if shoe.nil?
+      flash[:alert] = "Shoe not found"
+      redirect_to root_path
+      return
     end
 
-    redirect_to cart_index_path
+    existing_item = session[:shopping_cart].find { |item| item["id"] == id }
+
+    if existing_item
+      existing_item["quantity"] += quantity
+    else
+      session[:shopping_cart] << { "id" => id, "quantity" => quantity, "shoe" => shoe }
+    end
+
+    flash[:notice] = "+ #{quantity} #{shoe.show_model}(s) added to cart. Check your Cart"
+    redirect_to root_path
   end
 
   def destroy
+    logger.debug("Removing #{params[:id]} from cart.")
     id = params[:id].to_i
-    shoe = Shoe.find(id)
-    session[:shopping_cart].delete(id)
-    flash[:notice] = "- #{shoe.shoe_model} removed from cart."
-    redirect_to root_path
+
+    if (index = session[:shopping_cart].find_index { |item| item["id"] == id })
+      session[:shopping_cart].delete_at(index)
+    end
+
+    redirect_to cart_path
   end
 
-  def checkout
-    if user_signed_in?
-      order = current_user.orders.create(
-        subtotal: params[:subtotal],
-        pst: params[:pst],
-        gst: params[:gst],
-        hst: params[:hst],
-        total: params[:total],
-        status: "paid"
-      )
+  def update_quantity
+    id = params[:id].to_i
+    quantity = params[:quantity].to_i
 
-      if order.valid?
-        session[:shopping_cart].each do |id, quantity|
-          shoe = Shoe.find(id)
-          price = shoe.sale_price.present? ? shoe.sale_price : shoe.price
-          order.deliveries.create(
-            quantity: quantity,
-            item_price: item_price
-          )
-        end
+    existing_item = session[:shopping_cart].find { |item| item["id"] == id }
 
-        session[:shopping_cart].clear
-        flash[:notice] = "Order Completed!"
-        redirect_to root_path
-      else
-        flash[:alert] = "Order creation failed."
-        redirect_back(fallback_location: root_path)
-      end
-    else
-      flash[:alert] = "You must be signed in to checkout."
-      redirect_to new_user_session_path
-    end
+    return unless existing_item
+
+    existing_item["quantity"] = quantity
+
+    redirect_to cart_path
+  end
+
+  def show
+    @cart = session[:shopping_cart]
   end
 end
+

@@ -1,21 +1,9 @@
 Rails.application.routes.draw do
-  #get 'provinces/index'
-  #get 'brands/index'
-  #get 'brands/show'
-  #get 'home/index'
-  #get 'contact/show'
-  #get 'about/show'
-  #get 'cart/index'
-  #get 'shoes/index'
-  #get 'shoes/show'
+  get 'cart/show'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  get 'home/index'
-  get 'order/index'
-  get 'contact/show'
-  get 'about/show'
   get 'about', to: 'about#show'
   get 'contact', to: 'contact#show'
 
@@ -33,6 +21,10 @@ Rails.application.routes.draw do
   resources :home
   resources :items
   resources :regions
+  resources :orders
+  resources :cart do
+    post "update_quantity", on: :member
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
