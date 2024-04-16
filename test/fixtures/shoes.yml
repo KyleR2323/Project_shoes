@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shoe_model: MyString
+  shoe_model: MyString
+  quantity_available: 1
+  gender: MyString
+  size: MyString
+  color: MyString
+  material: MyString
+  price: 9.99
+  description: MyText
+
+two:
+  shoe_model: MyString
+  shoe_model: MyString
+  quantity_available: 1
+  gender: MyString
+  size: MyString
+  color: MyString
+  material: MyString
+  price: 9.99
+  description: MyText
