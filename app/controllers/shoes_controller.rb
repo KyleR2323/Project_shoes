@@ -1,6 +1,15 @@
 class ShoesController < ApplicationController
   def index
-    @shoes = Shoe.includes(:brand).page(params[:page]).per(12)
+    @shoes = case params[:filter]
+    when "on_sale"
+      Shoe.where(on_sale: true)
+    when "new"
+      Shoe.where("created_at >= ?", 3.days.ago)
+    when "recently_updated"
+      Shoe.where("updated_at >= ? AND created_at < ?", 3.days.ago, 3.days.ago)
+    else
+      Shoe.all
+    end.page(params[:page]).per(12)
   end
 
   def show

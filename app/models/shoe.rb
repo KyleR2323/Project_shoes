@@ -9,7 +9,7 @@ class Shoe < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["brand_id", "color", "created_at", "description", "gender", "id", "id_value", "material", "price", "quantity_available", "sale_price_id", "shoe_model", "shoe_type", "size", "updated_at"]
+    ["brand_id", "color", "created_at", "description", "gender", "id", "id_value", "material", "price", "quantity_available", "sale_price_id", "shoe_model", "on_sale", "shoe_type", "size", "updated_at"]
   end
 
   has_one_attached :image

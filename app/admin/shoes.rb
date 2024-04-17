@@ -5,7 +5,7 @@ ActiveAdmin.register Shoe do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :shoe_model, :shoe_type, :quantity_available, :gender, :size, :color, :material, :price, :description, :sale_price_id, :brand_id
+  permit_params :shoe_model, :shoe_type, :quantity_available, :gender, :size, :color, :material, :price, :description, :sale_price_id, :on_sale, :brand_id, :image
   #
   # or
   #
@@ -29,6 +29,7 @@ ActiveAdmin.register Shoe do
       f.input :color, as: :string, label: "Color"
       f.input :material
       f.input :price
+      f.input :on_sale
       f.input :sale_price, as: :select, collection: SalePrice.pluck(:sale_price, :id), prompt: "Sale Price" # Customize label for sale_price
       f.input :description
       f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image, size: "100x100") : ""

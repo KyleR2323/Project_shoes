@@ -22,7 +22,7 @@ class CartController < ApplicationController
       session[:shopping_cart] << { "id" => id, "quantity" => quantity, "shoe" => shoe }
     end
 
-    flash[:notice] = "+ #{quantity} #{shoe.show_model}(s) added to cart. Check your Cart"
+    flash[:notice] = "+ #{quantity} #{shoe.shoe_model}(s) added to cart. Check your Cart"
     redirect_to root_path
   end
 

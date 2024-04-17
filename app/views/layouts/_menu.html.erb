@@ -1,8 +1,49 @@
-<nav class="navbar">
+<nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-menu">
     <%= link_to 'Home', root_path, class: "navbar-item"%>
-    <%= link_to 'About Us', about_path, class: "navbar-item"%>
-    <%= link_to 'Contact', contact_path, class: "navbar-item"%>
     <%= link_to 'Shoes', shoes_path, class: "navbar-item"%>
+
+    <div class="navbar-item">
+      <% if user_signed_in? %>
+        <a href="<%= cart_path(current_user.id) %>" class="navbar-item">
+          Cart
+          <span class="tag is-primary">
+            <%= session[:shopping_cart].length %>
+          </span>
+        </a>
+        <a href="<%= orders_path %>" class="navbar-item">
+          Orders
+        </a>
+      <% end %>
+    </div>
+
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        More
+      </a>
+
+      <div class="navbar-dropdown">
+        <a class="navbar-item">
+          About
+        </a>
+        <a class="navbar-item">
+          Contact
+        </a>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <% if user_signed_in? %>
+            <p>Hi, <%= current_user.first_name %>!</p>
+            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'ml-5 button is-danger' %>
+          <% else %>
+            <%= button_to 'Sign Up', new_user_registration_path, method: :get, class: 'button is-info' %>
+            <%= button_to 'Login', new_user_session_path, method: :get, class: 'ml-3 button is-info' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
