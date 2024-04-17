@@ -1,2 +1,35 @@
-<h1>Brands#show</h1>
-<p>Find me in app/views/brands/show.html.erb</p>
+<div class="card">
+  <h1 class="title is-1 has-text-weight-bold mb-4 has-text-centered">Brands</h1>
+  <table class="table is-fullwidth is-size-7 is-text-left">
+    <thead class="is-size-7 has-text-grey-dark">
+      <tr>
+        <th class="px-6 py-3">
+            Image
+        </th>
+        <th class="px-6 py-3">
+            Shoes
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @brand.shoes.each do |shoe| %>
+        <tr>
+          <th>
+              <% if shoe.image.present? %>
+                  <div class="card-image">
+                    <%= image_tag(shoe.image, alt: "#{shoe.shoe_model} Image", size: '200x200') %>
+                  </div>
+              <% end %>
+          </th>
+          <td>
+            <strong><%= shoe.shoe_model %></strong>
+            <p class="subtitle is-6">Description:</p>
+            <p><%= shoe.description %></p>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="card-content">
+  </div>
+</div>

@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
+  get 'checkout/cancel'
+  get 'checkout/create'
+  get 'checkout/success'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   get 'about', to: 'about#show'
   get 'contact', to: 'contact#show'
-
-  get '/index', to:'home#index'
-  get '/sale', to:'home#index'
-  get '/new', to:'home#index'
 
   resources :shoes, only: [:index, :show] do
     collection do
@@ -18,11 +17,16 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :cart, only: [:create, :checkout, :destroy, :index, :update]
   resources :home
-  resources :items
-  resources :regions
   resources :orders
+  resources :brands, only: [:index, :show]
   resources :cart do
     post "update_quantity", on: :member
+  end
+
+  scope "/checkout" do
+    post "create", to: "checkout#create", as: "checkout_create"
+    get "success", to: "checkout#success", as: "checkout_success"
+    get "cancel", to: "checkout#cancel", as: "checkout_cancel"
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

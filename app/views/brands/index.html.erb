@@ -1,2 +1,31 @@
-<h1>Brands#index</h1>
-<p>Find me in app/views/brands/index.html.erb</p>
+<div class="card">
+  <h1 class="title is-1 has-text-weight-bold mb-4 has-text-centered">Brands</h1>
+  <table class="table is-fullwidth is-size-7 is-text-left">
+    <thead class="is-size-7 has-text-grey-dark">
+      <tr>
+        <th class="px-6 py-3">
+            Brands
+        </th>
+        <th class="px-6 py-3">
+            Shoes in Brands
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @brands.each do |brand| %>
+        <tr>
+          <th>
+            <%= link_to brand_path(brand), class: "has-text-black" do %>
+              <%= brand.brand_name %>
+            <% end %>
+          </th>
+          <td>
+            <%= brand.shoes.count %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="card-content">
+  </div>
+</div>
