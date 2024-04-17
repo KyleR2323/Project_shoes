@@ -22,6 +22,7 @@
           <p class="subtitle is-6">Size: <%= shoe.size %></p>
           <p class="subtitle is-6"><strong>Description:</strong></p>
           <p><%= shoe.description %></p>
+          <%= render partial: 'add_cart', locals: { id: shoe.id } %>
         </div>
   </div>
 </div>

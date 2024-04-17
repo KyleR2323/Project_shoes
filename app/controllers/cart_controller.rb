@@ -6,7 +6,7 @@ class CartController < ApplicationController
     quantity = params[:quantity].to_i
     quantity = 1 if quantity <= 0
 
-    shoe = Shoe.find_by(id: id)  # Find the shoe by its ID
+    shoe = Shoe.find_by(id: id)
 
     if shoe.nil?
       flash[:alert] = "Shoe not found"

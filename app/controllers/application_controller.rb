@@ -11,19 +11,19 @@ class ApplicationController < ActionController::Base
   end
 
   def cart
-    cart_item = []
+    cart_items = []
     total_price = 0
 
     session[:shopping_cart].each do |item|
-      shoes = Shoe.find_by(id: item["id"])
+      shoe = Shoe.find_by(id: item["id"])
 
       if shoe
         quantity = item["quantity"]
         subtotal = shoe.price * quantity
         total_price += subtotal
-        cart_item << { "product" => shoe, "quantity" => quantity, "subtotal" => subtotal }
+        cart_items << { "shoe" => shoe, "quantity" => quantity, "subtotal" => subtotal }
       else
-        Rails.logger.error("Product with ID #{item['id']} not found.")
+        Rails.logger.error("Shoe with ID #{item['id']} not found.")
       end
     end
 

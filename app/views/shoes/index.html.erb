@@ -2,7 +2,6 @@
   <% @shoes.each do |shoe| %>
       <div class="column is-one-quarter">
         <%= render shoe %>
-        <%= render partial: 'add_cart', locals: { id: shoe.id } %>
       </div>
   <% end %>
 </div>

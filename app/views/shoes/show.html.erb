@@ -17,15 +17,9 @@
         <p class="subtitle is-6">Gender: <%= @shoe.gender %></p>
         <p class="subtitle is-6">Stock Quantity: <%= @shoe.quantity_available %></p>
         <p class="subtitle is-6">Color: <%= @shoe.color %></p>
-        <% if @shoe.description.present? %>
-          <p class="subtitle is-6"><strong>Description:</strong></p>
-          <div class="content">
-            <% @shoe.description.split("\n").each do |sentence| %>
-              <p><%= sentence.strip %></p>
-            <% end %>
-          </div>
-        <% end %>
-
+        <p class="subtitle is-6"><strong>Description:</strong></p>
+        <p><%= @shoe.description %></p>
+        <%= render partial: 'add_cart', locals: { id: @shoe.id } %>
       </div>
     </div>
   </div>

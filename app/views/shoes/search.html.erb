@@ -24,6 +24,7 @@
                 <p class="subtitle is-6">Gender: <%= shoe.gender %></p>
                 <p class="subtitle is-6">Size: <%= shoe.size %></p>
                 <p class="subtitle is-6">Description: <%= shoe.description %></p>
+                <%= render partial: 'add_cart', locals: { id: shoe.id } %>
               </div>
             </div>
           </div>
