@@ -1,2 +1,17 @@
-<h1>Checkout#success</h1>
-<p>Find me in app/views/checkout/success.html.erb</p>
+<section class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns is-vcentered">
+        <div class="column is-8 is-offset-2">
+          <h1 class="title has-text-black">
+            Payment Successful
+          </h1>
+          <div class="notification is-light">
+            Thank you for your purchase. Your payment id:<%= @payment_intent.id %> was successful.
+              <%= link_to 'Go Back Orders', order_path(@order), class: 'button is-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -4,7 +4,7 @@ class ShoesController < ApplicationController
     when "on_sale"
       Shoe.where(on_sale: true)
     when "new"
-      Shoe.where("created_at >= ?", 3.days.ago)
+      Shoe.where("created_at >= ?", 1.hour.ago)
     when "recently_updated"
       Shoe.where("updated_at >= ? AND created_at < ?", 3.days.ago, 3.days.ago)
     else

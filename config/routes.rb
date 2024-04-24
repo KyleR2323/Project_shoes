@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'checkout/cancel'
-  get 'checkout/create'
-  get 'checkout/success'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -15,7 +12,6 @@ Rails.application.routes.draw do
     end
   end
   root 'home#index'
-  resources :cart, only: [:create, :checkout, :destroy, :index, :update]
   resources :home
   resources :orders
   resources :brands, only: [:index, :show]
